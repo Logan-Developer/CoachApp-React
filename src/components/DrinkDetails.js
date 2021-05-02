@@ -68,29 +68,38 @@ const DrinkDetails = props => {
                     </tbody>
                 </Table>
                 <h2>Commentaires</h2>
-                {drink.comments === undefined ? (
+                {drink.comments.length === 0 ? (
                         <p>Pas encore de commentaire</p>
                     ) :
                     (
                         <>
                             {
-                                drink.comments.map(comment => <Comment commentUrl={comment} login={props.login} handleDeleteComment={handleDeleteComment}/>)
+                                drink.comments.map(comment => <Comment comment={comment} user={props.user} handleDeleteComment={handleDeleteComment}/>)
                             }
                         </>
                     )
                 }
-                <Form>
-                    <Form.Group controlId="formCommentTitle">
-                        <Form.Label>Titre</Form.Label>
-                        <Form.Control size="lg" type="text" placeholder="Titre" value={commentTitle} onChange={event => setCommentTitle(event.target.value)}/>
-                    </Form.Group>
-                    <Form.Group controlId="formCommentMessage">
-                        <Form.Label>Message</Form.Label>
-                        <Form.Control as="textarea" rows={10} cols={50} value={commentMessage} onChange={event => setCommentMessage(event.target.value)}/>
-                    </Form.Group>
-                    <br/>
-                    <Button className="input-submit" onClick={handleAddComment}>Valider</Button>
-                </Form>
+
+                {props.user === "-1" ? (
+                        <></>
+                    ) :
+                    (
+                        <>
+                            <Form>
+                                <Form.Group controlId="formCommentTitle">
+                                    <Form.Label>Titre</Form.Label>
+                                    <Form.Control size="lg" type="text" value={commentTitle} onChange={event => setCommentTitle(event.target.value)}/>
+                                </Form.Group>
+                                <Form.Group controlId="formCommentMessage">
+                                    <Form.Label>Message</Form.Label>
+                                    <Form.Control as="textarea" rows={10} cols={50} value={commentMessage} onChange={event => setCommentMessage(event.target.value)}/>
+                                </Form.Group>
+                                <br/>
+                                <Button className="input-submit" onClick={handleAddComment}>Valider</Button>
+                            </Form>
+                        </>
+                    )
+                }
             </div>
         )
     } else {

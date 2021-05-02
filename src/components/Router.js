@@ -15,19 +15,19 @@ import MyAccount from "./MyAccount";
 const Router = props => {
     return (
         <BrowserRouter>
-            <NavBar login={props.login}/>
+            <NavBar user={props.user}/>
             <Switch>
                 <Route exact path="/about">
                     <About/>
                 </Route>
                 <Route exact path="/workshops/:id">
-                    <WorkshopDetails login={props.login}/>
+                    <WorkshopDetails user={props.user}/>
                 </Route>
                 <Route exact path="/workshops">
-                    <WorkshopsList/>
+                    <WorkshopsList user={props.user}/>
                 </Route>
                 <Route exact path="/drinks/:id">
-                    <DrinkDetails login={props.login}/>
+                    <DrinkDetails user={props.user}/>
                 </Route>
                 <Route exact path="/drinks">
                     <DrinksList/>

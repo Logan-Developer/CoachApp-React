@@ -1,54 +1,27 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Card} from "react-bootstrap";
 import Moment from "moment";
-import axios from "./AxiosInterceptor";
 
-const Comment = ({commentUrl, login, handleDeleteComment}) => {
-
-    const [comment, setComment] = useState({});
-    const [owner, setOwner] = useState({});
-
-    useEffect(() => {
-        const fetchComment = async () => {
-            axios.get(commentUrl)
-                .then(response => {
-                    setComment(response.data)
-                    fetchOwner(response.data.owner)
-                }, error => {
-                    console.log(error);
-                });
-        }
-
-        fetchComment();
-    }, [commentUrl]);
-
-    const fetchOwner = async ownerUrl => {
-        axios.get(ownerUrl)
-            .then(response => {
-                setOwner(response.data)
-            }, error => {
-                console.log(error);
-            });
-    }
+const Comment = ({comment, user, handleDeleteComment}) => {
 
     return (
         <Card>
             <Card.Header>De <i>
-                {owner === null ? (
+                {comment.owner === null ? (
                         <>Anonyme</>
                     ) :
                     (
-                        <>{owner.login}</>
+                        <>{comment.owner.login}</>
                     )
                 }
             </i> le {Moment(comment.date).format("DD/MM/YYYY à HH:mm")}
 
-                {owner === null ?
+                {comment.owner === null ?
                     (<> </>)
-                    : (<> {owner.login === login ?
+                    : (<> {comment.owner.login === user.login ?
                         (
                             <>
-                                <button className="input-submit" onClick={event => handleDeleteComment(comment.id)}>Supprimer</button>
+                                <button className="input-submit" onClick={() => handleDeleteComment(comment.id)}>Supprimer</button>
                             </>
                         ) : (<></>)
                     }

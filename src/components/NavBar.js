@@ -6,7 +6,7 @@ import {Nav} from "react-bootstrap";
 const NavBar = props => {
 
     let loginNav;
-    if (props.login === "" || props.login === "-1") {
+    if (props.user === undefined) {
         loginNav = <Navbar.Brand as={Link} to="/login">Connexion</Navbar.Brand>
 
     } else {
@@ -14,7 +14,7 @@ const NavBar = props => {
             <>
                 <Navbar.Brand as={Link} to="/myAccount">Mon compte</Navbar.Brand>
                 <Navbar.Brand as={Link} to="/logout">Déconnexion</Navbar.Brand>
-                <Navbar.Text>{props.login}</Navbar.Text>
+                <Navbar.Text>{props.user.login}</Navbar.Text>
             </>
     }
 

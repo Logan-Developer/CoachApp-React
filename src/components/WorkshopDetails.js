@@ -70,7 +70,7 @@ const WorkshopDetails = props => {
                         </tr>
                         <tr>
                             <td>Unité d'intensité</td>
-                            <td>{props.intensityUnity}</td>
+                            <td>{workshop.intensityUnity}</td>
                         </tr>
                     </tbody>
                 </Table>
@@ -81,23 +81,32 @@ const WorkshopDetails = props => {
                     (
                         <>
                             {
-                                workshop.commentaries.map(comment => <Comment commentUrl={comment} login={props.login} handleDeleteComment={handleDeleteComment}/>)
+                                workshop.commentaries.map(comment => <Comment comment={comment} login={props.login} handleDeleteComment={handleDeleteComment}/>)
                             }
                         </>
                     )
                 }
-                <Form>
-                    <Form.Group controlId="formCommentTitle">
-                        <Form.Label>Titre</Form.Label>
-                        <Form.Control size="lg" type="text" placeholder="Titre" value={commentTitle} onChange={event => setCommentTitle(event.target.value)}/>
-                    </Form.Group>
-                    <Form.Group controlId="formCommentMessage">
-                        <Form.Label>Message</Form.Label>
-                        <Form.Control as="textarea" rows={10} cols={50} value={commentMessage} onChange={event => setCommentMessage(event.target.value)}/>
-                    </Form.Group>
-                    <br/>
-                    <Button className="input-submit" onClick={handleAddComment}>Valider</Button>
-                </Form>
+
+                {props.login === "-1" ? (
+                    <></>
+                    ) :
+                    (
+                        <>
+                            <Form>
+                                <Form.Group controlId="formCommentTitle">
+                                    <Form.Label>Titre</Form.Label>
+                                    <Form.Control size="lg" type="text" value={commentTitle} onChange={event => setCommentTitle(event.target.value)}/>
+                                </Form.Group>
+                                <Form.Group controlId="formCommentMessage">
+                                    <Form.Label>Message</Form.Label>
+                                    <Form.Control as="textarea" rows={10} cols={50} value={commentMessage} onChange={event => setCommentMessage(event.target.value)}/>
+                                </Form.Group>
+                                <br/>
+                                <Button className="input-submit" onClick={handleAddComment}>Valider</Button>
+                            </Form>
+                        </>
+                    )
+                }
             </div>
         )
     }

@@ -1,21 +1,20 @@
-// ./components/AxiosInterceptor.js
 import axios from "axios";
 
 
-//Définition des types de flux attendus en fonction des types de requête/
+// Definition of the expected flow types according to the request types
 axios.defaults.headers.common['Accept'] = 'application/json';
 axios.defaults.headers.put['Content-Type'] = 'application/json';
 axios.defaults.headers.get['Content-Type'] = 'application/json';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.delete['Content-Type'] = 'application/json';
 
-// Définition de l'URL de base. Pratique, car les ports peuvent changer !
+// Definition of the base URL. Convenient, because the ports can change!
 const baseUrl = "http://127.0.0.1:8000/";
 
 axios.defaults.baseURL = baseUrl;
 
 
-//Ajoute à chaque requête Axios le token d'authentification s'il est valide
+// Adds the authentication token to each Axios request if it is valid
 axios.interceptors.request.use(
     (config) => {
         const tokenTmp =  String(localStorage.getItem("token") || -1)
@@ -25,7 +24,7 @@ axios.interceptors.request.use(
         }
         else
         {
-            //Le token n'existe pas ou on essaie de se connecter
+            // The token does not exist or we are trying to connect
             delete(config.headers["Authorization"])
         }
         return config;
@@ -35,13 +34,13 @@ axios.interceptors.request.use(
     }
 );
 
-//Si on intercepte une réponse qui nous dit que le token est périmé, on utilise le token de refresh pour obtenir un nouveau token
+// If we intercept a response that tells us that the token is expired, we use the refresh token to obtain a new token
 axios.interceptors.response.use(
     (response) => {
         return response;
     },
     function (error) {
-        //Explications ici : https://stackoverflow.com/questions/64576410/react-axios-interceptor-for-refresh-token
+        //Explications here : https://stackoverflow.com/questions/64576410/react-axios-interceptor-for-refresh-token
 
         const originalRequest = error.config;
         console.log(error.config)
@@ -86,7 +85,7 @@ axios.interceptors.response.use(
         {
             console.log(error.response.data)
         }
-        // specific error handling done elsewhere
+        // Specific error handling done elsewhere
         return Promise.reject(error);
     }
 );

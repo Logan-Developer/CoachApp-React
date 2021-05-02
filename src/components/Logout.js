@@ -8,7 +8,7 @@ const Logout = props => {
     const handleSubmitLogout = event => {
         event.preventDefault();
 
-        props.handleChangeSession("-1", "-1", "-1");
+        props.handleChangeSession("-1", "-1");
         history.push("/login");
     }
 
