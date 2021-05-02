@@ -18,7 +18,7 @@ const Comment = ({comment, user, handleDeleteComment}) => {
 
                 {comment.owner === null ?
                     (<> </>)
-                    : (<> {comment.owner.login === user.login ?
+                    : (<> {user !== undefined && comment.owner.login === user.login ?
                         (
                             <>
                                 <button className="input-submit" onClick={() => handleDeleteComment(comment.id)}>Supprimer</button>

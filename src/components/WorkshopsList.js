@@ -28,7 +28,7 @@ const WorkshopsList = props => {
                 setWorkshopIntensityUnity("");
                 setWorkshopDescription("");
 
-                setWorkshops([...workshops, {title: workshopTitle, description: workshopDescription, perfUnity: workshopPerfUnity, intensityUnity: workshopIntensityUnity}])
+                setWorkshops([...workshops, {id: response.data.id, title: workshopTitle, description: workshopDescription, perfUnity: workshopPerfUnity, intensityUnity: workshopIntensityUnity}])
             }, error => console.log(error));
     }
 
@@ -57,7 +57,7 @@ const WorkshopsList = props => {
                 </tbody>
             </Table>
 
-            {props.user.login ===  undefined || props.user.role !== "ROLE_ADMIN" ? (
+            {props.user ===  undefined || props.user.role !== "ROLE_ADMIN" ? (
                     <></>
                 ) :
                 (

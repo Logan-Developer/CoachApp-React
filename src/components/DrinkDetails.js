@@ -80,7 +80,7 @@ const DrinkDetails = props => {
                     )
                 }
 
-                {props.user === "-1" ? (
+                {props.user === undefined ? (
                         <></>
                     ) :
                     (

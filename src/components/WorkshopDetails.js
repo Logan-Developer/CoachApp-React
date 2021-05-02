@@ -87,7 +87,7 @@ const WorkshopDetails = props => {
                     )
                 }
 
-                {props.login === "-1" ? (
+                {props.user === undefined ? (
                     <></>
                     ) :
                     (
