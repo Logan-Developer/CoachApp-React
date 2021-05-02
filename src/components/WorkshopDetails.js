@@ -81,7 +81,7 @@ const WorkshopDetails = props => {
                     (
                         <>
                             {
-                                workshop.commentaries.map(comment => <Comment comment={comment} login={props.login} handleDeleteComment={handleDeleteComment}/>)
+                                workshop.commentaries.map(comment => <Comment comment={comment} user={props.user} handleDeleteComment={handleDeleteComment}/>)
                             }
                         </>
                     )
