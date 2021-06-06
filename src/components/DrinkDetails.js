@@ -105,7 +105,7 @@ const DrinkDetails = props => {
     } else {
         return (
             <div className="container">
-                <p>Oups, nous ne possédons pas cette boisson!</p>
+                <p>Oups, nous ne possédons pas cette boisson (pour le moment)!</p>
             </div>
         )
     }

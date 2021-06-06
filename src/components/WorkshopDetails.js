@@ -7,7 +7,7 @@ import Comment from "./Comment";
 
 const WorkshopDetails = props => {
 
-    const [workshop, setWorkshop] = useState({});
+    const [workshop, setWorkshop] = useState();
     const {id} = useParams();
 
     const [commentTitle, setCommentTitle] = useState("");
@@ -75,7 +75,7 @@ const WorkshopDetails = props => {
                     </tbody>
                 </Table>
                 <h2>Commentaires</h2>
-                {workshop.commentaries === undefined ? (
+                {workshop.commentaries.length === 0 ? (
                         <p>Pas encore de commentaire</p>
                     ) :
                     (
@@ -107,6 +107,12 @@ const WorkshopDetails = props => {
                         </>
                     )
                 }
+            </div>
+        )
+    } else {
+        return (
+            <div className="container">
+                <p>Oups, cet atelier n'existe pas (pour le moment)!</p>
             </div>
         )
     }
